@@ -31,7 +31,7 @@ namespace WindowsFormsApplication1
 
             while ( reader.Read() ){
 
-                listBox1.Items.Add(reader.GetString(0) + "\t" + reader.GetString(1) + "\t" + reader.GetString(2) + "\t" + reader.GetString(3));
+                listBox1.Items.Add(reader["ogr_adi"] + "\t" + reader[1] + "\t" + reader[2] + "\t" + reader[3]);
 
             }
 
