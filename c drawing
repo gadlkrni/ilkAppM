@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace WindowsFormsApplication2
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Graphics benimTuvalim;
+            benimTuvalim = this.CreateGraphics();
+
+            Pen kalem = new Pen(Color.Black, 30);
+            Pen kirmizi = new Pen(Color.Red, 10);
+
+            // benimTuvalim.DrawLine(kalem, 30,30, 30,60);
+
+            //benimTuvalim.DrawRectangle(kalem, 100, 105, 150, 125);
+
+            //benimTuvalim.DrawRectangle(kirmizi, 10, 10, this.Width - 40, this.Height - 60);
+
+            SolidBrush boya1 = new SolidBrush(Color.Green);
+
+            benimTuvalim.FillRectangle(boya1, 10, 10, 50, 100);
+        }
+    }
+}
