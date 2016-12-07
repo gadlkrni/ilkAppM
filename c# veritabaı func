@@ -1,0 +1,69 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using MySql.Data;
+using MySql.Data.MySqlClient;
+
+namespace WindowsFormsApplication1
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        MySqlConnection baglan = new MySqlConnection("Server=localhost;Database=veritab;Uid=root;Pwd='';");
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+            baglan.Open();
+
+            MySqlDataAdapter adaptor = new MySqlDataAdapter("SELECT * FROM ogrenciler", baglan);
+
+            DataSet veriseti = new DataSet();
+            adaptor.Fill(veriseti, "ogrenciler");
+            dataGridView1.DataSource = veriseti.Tables["ogrenciler"];
+
+        }
+
+        void komutCalistirFunc(string comingKomut){
+        
+            MySqlCommand komut = baglan.CreateCommand();
+            komut.CommandText = comingKomut;
+            komut.ExecuteNonQuery();
+        
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            string ad, soyad;
+            int yas;
+
+            ad = textBox1.Text;
+            soyad = textBox2.Text;
+            yas = Convert.ToInt32( textBox3.Text );
+
+            MySqlCommand komut = baglan.CreateCommand();
+            komut.CommandText = "INSERT INTO ogrenciler (ogr_adi,ogr_soyadi,ogr_yas) VALUES ('" + ad + "', '" + soyad + "', " + yas + ")";
+            komut.ExecuteNonQuery();
+
+            // EKLENENİ GÜNCELLE
+
+            MySqlDataAdapter adaptor = new MySqlDataAdapter("SELECT * FROM ogrenciler", baglan);
+
+            DataSet veriseti = new DataSet();
+            adaptor.Fill(veriseti, "ogrenciler");
+            dataGridView1.DataSource = veriseti.Tables["ogrenciler"];
+
+        }
+    }
+}
