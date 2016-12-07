@@ -26,11 +26,7 @@ namespace WindowsFormsApplication1
 
             baglan.Open();
 
-            MySqlDataAdapter adaptor = new MySqlDataAdapter("SELECT * FROM ogrenciler", baglan);
-
-            DataSet veriseti = new DataSet();
-            adaptor.Fill(veriseti, "ogrenciler");
-            dataGridView1.DataSource = veriseti.Tables["ogrenciler"];
+            komutDataGuncelle();
 
         }
 
@@ -39,6 +35,16 @@ namespace WindowsFormsApplication1
             MySqlCommand komut = baglan.CreateCommand();
             komut.CommandText = comingKomut;
             komut.ExecuteNonQuery();
+        
+        }
+
+        void komutDataGuncelle() {
+
+            MySqlDataAdapter adaptor = new MySqlDataAdapter("SELECT * FROM ogrenciler", baglan);
+
+            DataSet veriseti = new DataSet();
+            adaptor.Fill(veriseti, "ogrenciler");
+            dataGridView1.DataSource = veriseti.Tables["ogrenciler"];
         
         }
 
@@ -52,17 +58,9 @@ namespace WindowsFormsApplication1
             soyad = textBox2.Text;
             yas = Convert.ToInt32( textBox3.Text );
 
-            MySqlCommand komut = baglan.CreateCommand();
-            komut.CommandText = "INSERT INTO ogrenciler (ogr_adi,ogr_soyadi,ogr_yas) VALUES ('" + ad + "', '" + soyad + "', " + yas + ")";
-            komut.ExecuteNonQuery();
+            komutCalistirFunc("INSERT INTO ogrenciler (ogr_adi,ogr_soyadi,ogr_yas) VALUES ('" + ad + "', '" + soyad + "', " + yas + ")");
 
-            // EKLENENİ GÜNCELLE
-
-            MySqlDataAdapter adaptor = new MySqlDataAdapter("SELECT * FROM ogrenciler", baglan);
-
-            DataSet veriseti = new DataSet();
-            adaptor.Fill(veriseti, "ogrenciler");
-            dataGridView1.DataSource = veriseti.Tables["ogrenciler"];
+            komutDataGuncelle();
 
         }
     }
