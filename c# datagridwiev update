@@ -28,6 +28,8 @@ namespace WindowsFormsApplication1
 
             komutDataGuncelle();
 
+            label7.Visible = false;
+
         }
 
         void komutCalistirFunc(string comingKomut)
@@ -64,16 +66,38 @@ namespace WindowsFormsApplication1
 
             komutDataGuncelle();
 
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            string upd_ad, upd_soyad;
-            int upd_yas;
+            textBox4.Text = dataGridView1.Rows[e.RowIndex].Cells["ogr_adi"].Value.ToString();
+            textBox5.Text = dataGridView1.Rows[e.RowIndex].Cells["ogr_soyadi"].Value.ToString();
+            textBox6.Text = dataGridView1.Rows[e.RowIndex].Cells["ogr_yas"].Value.ToString();
 
-            upd_ad = dataGridView1.Rows[e.RowIndex].Cells["ogr_adi"].Value.ToString();
-            textBox4.Text = upd_ad;
+            label7.Text = dataGridView1.Rows[e.RowIndex].Cells["indis"].Value.ToString();
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            string upd_ad, upd_soyad;
+            int upd_yas, indis;
+
+            upd_ad = textBox4.Text;
+            upd_soyad = textBox5.Text;
+            upd_yas = Convert.ToInt32(textBox6.Text);
+
+            indis = Convert.ToInt32(label7.Text);
+
+            komutCalistirFunc("UPDATE ogrenciler SET ogr_adi='" + upd_ad + "', ogr_soyadi='" + upd_soyad + "', ogr_yas=" + upd_yas + " WHERE indis=" + indis + "");
+
+            komutDataGuncelle();
 
         }
 
