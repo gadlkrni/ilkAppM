@@ -64,5 +64,25 @@ namespace WindowsFormsApplication1
             }
 
         }
+
+        private void çıkışToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            DialogResult mesaj = MessageBox.Show("Çıkacan mı??","Uar",MessageBoxButtons.OKCancel);
+
+            if (mesaj == DialogResult.OK)
+            {
+
+                this.Close();
+
+            }
+            else
+            {
+
+                MessageBox.Show("gitmeedin!");
+
+            }
+
+        }
     }
 }
