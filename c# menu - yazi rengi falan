@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.IO;
 
 namespace WindowsFormsApplication1
 {
@@ -76,13 +77,39 @@ namespace WindowsFormsApplication1
                 this.Close();
 
             }
-            else
+
+        }
+
+        private void açToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            dosyaOpen();
+
+        }
+
+        public void dosyaOpen()
+        {
+
+            OpenFileDialog acilacakDosya = new OpenFileDialog();
+
+            acilacakDosya.Filter = "Metin Dosyaları: | *.txt";
+
+            
+
+            if (acilacakDosya.ShowDialog() == DialogResult.OK)
             {
 
-                MessageBox.Show("gitmeedin!");
+                string dosyaYolu = acilacakDosya.FileName;
+                StreamReader okunandosya = new StreamReader(dosyaYolu);
+
+                string okunanYazilar = okunandosya.ReadToEnd();
+
+                richTextBox1.Text = okunanYazilar;
+                okunandosya.Close();
 
             }
 
         }
+
     }
 }
