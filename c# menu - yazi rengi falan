@@ -94,8 +94,6 @@ namespace WindowsFormsApplication1
 
             acilacakDosya.Filter = "Metin Dosyaları: | *.txt";
 
-            
-
             if (acilacakDosya.ShowDialog() == DialogResult.OK)
             {
 
@@ -105,6 +103,37 @@ namespace WindowsFormsApplication1
                 string okunanYazilar = okunandosya.ReadToEnd();
 
                 richTextBox1.Text = okunanYazilar;
+                okunandosya.Close();
+
+            }
+
+        }
+
+        private void kaydetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            dosyaKaydet();
+
+        }
+
+        public void dosyaKaydet()
+        {
+
+            SaveFileDialog kaydedilecekDosya = new SaveFileDialog();
+            kaydedilecekDosya.Filter = "Metin Dosyaları: | *.txt";
+
+            kaydedilecekDosya.CreatePrompt = true;
+
+            if (kaydedilecekDosya.ShowDialog() == DialogResult.OK)
+            {
+
+                string dosyaYolu = kaydedilecekDosya.FileName;
+                StreamWriter okunandosya = new StreamWriter(dosyaYolu);
+
+                string yazilanYazilar = richTextBox1.Text;
+
+                okunandosya.WriteLine(yazilanYazilar);
+
                 okunandosya.Close();
 
             }
